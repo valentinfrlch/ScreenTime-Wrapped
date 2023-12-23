@@ -1,0 +1,22 @@
+ #drop_zone {
+     border: 2px dashed #0CF574;
+     -moz-border-radius: 15px;
+     -webkit-border-radius: 15px;
+     border-radius: 15px;
+     margin: 2vh 0 2vh 0;
+     height: 90vh;
+     padding: 25px;
+     text-align: center;
+     /* alignt text center vertically */
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     color: #0CF574;
+ }
+
+ /* set background color of page */
+ body {
+     background-color: #17183B;
+     color: #fff;
+     font-family: Poppins;
+ }

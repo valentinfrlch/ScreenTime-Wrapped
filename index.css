@@ -4,7 +4,7 @@
      -webkit-border-radius: 15px;
      border-radius: 15px;
      margin: 2vh 0 2vh 0;
-     height: 90vh;
+     height: 85vh;
      padding: 25px;
      text-align: center;
      /* alignt text center vertically */
@@ -19,4 +19,34 @@
      background-color: #17183B;
      color: #fff;
      font-family: Poppins;
+ }
+
+ /* header style /*
+ /* set logo and title side by side */
+ .header {
+     font-family: Poppins;
+     display: flex;
+     flex-direction: row;
+     justify-content: space-between;
+     align-items: center;
+     padding: 2vh 2vw 0 2vw;
+ }
+
+ .header-logo {
+     display: flex;
+     flex-direction: row;
+     justify-content: space-between;
+     align-items: center;
+     margin:
+ }
+
+ .header-logo img {
+     width: 6rem;
+     height: 6rem;
+ }
+
+ .header-title {
+     font-size: 1rem;
+     font-weight: 400;
+     margin-left: 1vw;
  }

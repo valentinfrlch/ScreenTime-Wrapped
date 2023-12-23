@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ⚡>
 
 <head>
     <meta charset="utf-8" />
@@ -8,10 +8,38 @@
     <meta name="description" content="Apple Screen Time Wrapped - See how you spent your time" />
     <!--add google fonts poppins-->
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="index.css"/>
+    <link rel="stylesheet" href="index.css" />
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <script async custom-element="amp-story" src="https://cdn.ampproject.org/v0/amp-story-1.0.js"></script>
 </head>
 
 <body>
+    <header>
+        <div class="header">
+            <div class="header-logo">
+                <img src="assets/logo.png" alt="Apple Logo" />
+                <div class="header-title">
+                    <h1>Screen Time Wrapped</h1>
+                </div>
+            </div>
+    </header>
+
+    <!--add amp stories-->
+    <amp-story title="Your Screen Time Wrapped">
+        <amp-story-page id="page-1">
+            <amp-story-grid-layer template="vertical">
+                <h1 id="totalHead"></h1>
+                <p id="totalText"></p>
+            </amp-story-grid-layer>
+        </amp-story-page>
+        <amp-story-page id="page-2">
+            <amp-story-grid-layer template="vertical">
+                <h1 id="topHead"></h1>
+                <p id="topText"></p>
+            </amp-story-grid-layer>
+        </amp-story-page>
+        <!-- Add more pages as needed -->
+    </amp-story>
     <div id="drop_zone">Drop files here</div>
     <canvas id="totalTime-chart"></canvas>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/0.4.0/js/sql.js"></script>

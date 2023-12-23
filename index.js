@@ -185,6 +185,8 @@ window.onload = function () {
                 console.log("Found " + Object.keys(transformed).length + " apps")
                 runQuery(files[i]).then(transformedData => {
                     createChart(transformedData);
+                    // set .story div to display: block
+                    loadStory()
                 }).catch(error => {
                     console.error('An error occurred:', error);
                 });
@@ -200,5 +202,25 @@ window.onload = function () {
     dropZone.ondragleave = function () {
         this.className = 'upload-drop-zone';
         return false;
+    }
+
+    /* STORIES */
+    // Load amp stories
+
+    function loadStory() {
+        // get all the placeholder elements for the stories
+        var totalHead = "Total time spent on your Mac";
+        var totalText = "You spent 100h looking at your screen in the last month";
+        var topHead = "Your most used app was...";
+        var topText = "YouTube";
+
+        // set the innerHTML of the placeholders to the actual stories
+        document.getElementById('totalHead').innerHTML = totalHead;
+        document.getElementById('totalText').innerHTML = totalText;
+
+        document.getElementById('topHead').innerHTML = topHead;
+        document.getElementById('topText').innerHTML = topText;
+        // show the stories
+        document.getElementById('story').style.display = "block";
     }
 }

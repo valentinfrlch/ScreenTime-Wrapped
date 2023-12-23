@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Drag and Drop File Upload</title>
+    <style>
+        #drop_zone {
+            border: 2px dashed #bbb;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            border-radius: 5px;
+            padding: 25px;
+            text-align: center;
+            color: #bbb;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="drop_zone">Drop files here</div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.5.0/sql-wasm.js"></script>
+    <script>
+        window.onload = function () {
+            alert("1. Open the Finder\n2. Command + Shift + G\n3. Paste this: djshfdjs\n4. Enter\n5. Drag \"knowledgeC.db\" onto this window");
+        }
+        var dropZone = document.getElementById('drop_zone');
+
+        dropZone.ondrop = function (e) {
+            e.preventDefault();
+            this.className = 'upload-drop-zone';
+
+            var files = e.dataTransfer.files;
+            for (var i = 0; i < files.length; i++) {
+                console.log(files[i].name);
+                if (files[i].name === "knowledgeC.db") {
+                    dropZone.remove(); // remove the drop zone
+                    runQuery(files[i]); // run a query against the database file
+                }
+            }
+        }
+
+        dropZone.ondragover = function () {
+            this.className = 'upload-drop-zone drop';
+            return false;
+        }
+
+        dropZone.ondragleave = function () {
+            this.className = 'upload-drop-zone';
+            return false;
+        }
+
+        function runQuery(file) {
+            var reader = new FileReader();
+            reader.onload = function () {
+                var uInt8Array = new Uint8Array(this.result);
+                var db = new SQL.Database(uInt8Array);
+                var contents = db.exec("SELECT * FROM your_table");
+                console.log(contents);
+            };
+            reader.readAsArrayBuffer(file);
+        }
+    </script>
+</body>
+
+</html>

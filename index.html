@@ -66,7 +66,31 @@
             </amp-story-grid-layer>
             <!-- Add more pages as needed -->
     </amp-story>
-    <div id="drop_zone">Drop files here</div>
+
+    <!-- HTML -->
+    <div id="lightbox">
+        <div class="lightbox-content">
+            <h2>How does this work?</h2>
+            <p>To get started see this quick <a
+                    href="https://valentins-organization.gitbook.io/screentime_wrapped/">getting started guide</a>.</p>
+            <ol>
+                <li>In Finder press Cmd + Shift + G</li>
+                <li>
+                    <p id="copy-text">Copy<button onclick="copyToClipboard()" class="copy-button">
+                            <span class="material-symbols-rounded">content_copy</span>
+                        </button></p>
+                </li>
+                <li>Drag & Drop</li>
+            </ol>
+            <div class="data-privacy-box">
+                <p>All data is processed locally and never shared with anyone.</p>
+            </div>
+            <button id="close-lightbox" onclick="closeLightbox()">Understood</button>
+        </div>
+    </div>
+
+
+    <div id="drop_zone">Drop knowledgeC.db here</div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/0.4.0/js/sql.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="index.js"></script>

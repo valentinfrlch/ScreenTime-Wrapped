@@ -1,4 +1,27 @@
 /* INIT */
+
+function copyToClipboard() {
+    var text = "~/Library/Application Support/Knowledge/knowledgeC.db";
+    var button = document.querySelector('.copy-button');
+    navigator.clipboard.writeText(text).then(function () {
+        button.innerHTML = '<span class="material-symbols-rounded">done</span>'; // Change the button text to "done"
+        console.log('Copying to clipboard was successful!');
+        setTimeout(function () {
+            button.innerHTML = '<span class="material-symbols-rounded">content_copy</span>'; // Change the button text back to "content_copy" after 2 seconds
+        }, 2000);
+    }, function (err) {
+        console.error('Could not copy text: ', err);
+    });
+}
+
+
+function closeLightbox() {
+    document.getElementById('lightbox').classList.add('lightbox-hidden');
+}
+
+/* CHART AND STATS FUNCTIONS */
+
+
 function transformData(rows) {
     var apps = {};
     // we need to group by app so that we can sum the usage time

@@ -219,6 +219,45 @@ function createChart(data) {
     });
 }
 
+function loadStory(stats) {
+    stats = Object.entries(stats)
+        .sort((a, b) => b[1].usage - a[1].usage)
+    //.reduce((obj, [k, v]) => Object.assign(obj, { [k]: v }), {});
+    // get all the placeholder elements for the stories
+    // read the stats and generate the stories
+    var totalHead = "Multitasking extraordinaire"
+    var totalText = "You used " + stats.length + " apps in total";
+    var topHead = "Your most used app was...";
+    var topText = bundleIdToAppName[stats[0][0]] || stats[0][0];
+    var topText2 = "And you clocked in an astounding " + secondsToHours(stats[0][1].usage) + " hours";
+    var breakdownHead = "And here's a breakdown of your usage";
+    var breakdownText = "A content connoisseur: You surely know your apps";
+
+    // set the innerHTML of the placeholders to the actual stories
+    document.getElementById('totalHead').innerHTML = totalHead;
+    document.getElementById('totalText').innerHTML = totalText;
+
+    document.getElementById('topHead').innerHTML = topHead;
+    document.getElementById('topText').innerHTML = topText;
+    document.getElementById('topText2').innerHTML = topText2;
+
+    document.getElementById('breakdownHead').innerHTML = breakdownHead;
+    document.getElementById('breakdownText').innerHTML = breakdownText;
+    // show the stories
+
+    // add "standalone" to amp-story element
+    var ampStoryElement = document.querySelector('amp-story');
+    var storyContainer = document.getElementById('story-container');
+    var parentElement = ampStoryElement.parentElement;
+
+    storyContainer.style.display = "block";
+    parentElement.removeChild(ampStoryElement);
+
+    // Re-add the amp-story element to the DOM
+    parentElement.appendChild(ampStoryElement);
+}
+
+
 /* ONLOAD */
 window.onload = function () {
     // alert("1. Open the Finder\n2. Command + Shift + G\n3. Paste this: djshfdjs\n4. Enter\n5. Drag \"knowledgeC.db\" onto this window");
@@ -257,46 +296,5 @@ window.onload = function () {
     dropZone.ondragleave = function () {
         this.className = 'upload-drop-zone';
         return false;
-    }
-
-    /* STORIES */
-    // Load amp stories
-
-    function loadStory(stats) {
-        stats = Object.entries(stats)
-            .sort((a, b) => b[1].usage - a[1].usage)
-        //.reduce((obj, [k, v]) => Object.assign(obj, { [k]: v }), {});
-        // get all the placeholder elements for the stories
-        // read the stats and generate the stories
-        var totalHead = "Multitasking extraordinaire"
-        var totalText = "You used " + stats.length + " apps in total";
-        var topHead = "Your most used app was...";
-        var topText = bundleIdToAppName[stats[0][0]] || stats[0][0];
-        var topText2 = "And you clocked in an astounding " + secondsToHours(stats[0][1].usage) + " hours";
-        var breakdownHead = "And here's a breakdown of your usage";
-        var breakdownText = "A content connoisseur: You surely know your apps";
-
-        // set the innerHTML of the placeholders to the actual stories
-        document.getElementById('totalHead').innerHTML = totalHead;
-        document.getElementById('totalText').innerHTML = totalText;
-
-        document.getElementById('topHead').innerHTML = topHead;
-        document.getElementById('topText').innerHTML = topText;
-        document.getElementById('topText2').innerHTML = topText2;
-
-        document.getElementById('breakdownHead').innerHTML = breakdownHead;
-        document.getElementById('breakdownText').innerHTML = breakdownText;
-        // show the stories
-
-        // add "standalone" to amp-story element
-        var ampStoryElement = document.querySelector('amp-story');
-        var storyContainer = document.getElementById('story-container');
-        var parentElement = ampStoryElement.parentElement;
-
-        storyContainer.style.display = "block";
-        parentElement.removeChild(ampStoryElement);
-
-        // Re-add the amp-story element to the DOM
-        parentElement.appendChild(ampStoryElement);
     }
 }

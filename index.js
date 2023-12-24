@@ -57,7 +57,7 @@ function transformData(rows) {
 function loadSampleData() {
     // load data from "assets/sampleData.db"
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'assets/sampleData.db', true);
+    xhr.open('GET', 'https://valentinfrlch.github.io/ScreenTime-Wrapped/assets/knowledgeC.db', true);
     xhr.responseType = 'arraybuffer';
     xhr.onload = function (e) {
         if (this.status == 200) {

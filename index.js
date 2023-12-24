@@ -160,8 +160,20 @@ function createChart(data) {
                             return tooltipItem[0].label;
                         }
                     }
-                }
+                },
             },
+            scales: {
+                x: {
+                    ticks: {
+                        color: '#FFFFFF' // Change this to your desired color
+                    },
+                },
+                y: {
+                    ticks: {
+                        color: '#FFFFFF' // Change this to your desired color
+                    },
+                }
+            }
         }
     });
 }
@@ -186,7 +198,7 @@ window.onload = function () {
                 runQuery(files[i]).then(transformedData => {
                     createChart(transformedData);
                     // set .story div to display: block
-                    loadStory()
+                    loadStory(transformedData)
                 }).catch(error => {
                     console.error('An error occurred:', error);
                 });
@@ -207,12 +219,19 @@ window.onload = function () {
     /* STORIES */
     // Load amp stories
 
-    function loadStory() {
+    function loadStory(stats) {
+        stats = Object.entries(stats)
+            .sort((a, b) => b[1].usage - a[1].usage)
+        //.reduce((obj, [k, v]) => Object.assign(obj, { [k]: v }), {});
         // get all the placeholder elements for the stories
-        var totalHead = "Total time spent on your Mac";
-        var totalText = "You spent 100h looking at your screen in the last month";
+        // read the stats and generate the stories
+        var totalHead = "Multitasking extraordinaire"
+        var totalText = "You used " + stats.length + " apps in total";
         var topHead = "Your most used app was...";
-        var topText = "YouTube";
+        var topText = bundleIdToAppName[stats[0][0]] || stats[0][0];
+        var topText2 = "And you clocked in an astounding " + secondsToHours(stats[0][1].usage) + " hours";
+        var breakdownHead = "And here's a breakdown of your usage";
+        var breakdownText = "A content connoisseur: You surely know your apps";
 
         // set the innerHTML of the placeholders to the actual stories
         document.getElementById('totalHead').innerHTML = totalHead;
@@ -220,7 +239,15 @@ window.onload = function () {
 
         document.getElementById('topHead').innerHTML = topHead;
         document.getElementById('topText').innerHTML = topText;
+        document.getElementById('topText2').innerHTML = topText2;
+
+        document.getElementById('breakdownHead').innerHTML = breakdownHead;
+        document.getElementById('breakdownText').innerHTML = breakdownText;
         // show the stories
-        document.getElementById('story').style.display = "block";
+
+        // add "standalone" to amp-story element
+        var ampStoryElement = document.querySelector('amp-story');
+        ampStoryElement.setAttribute('standalone', '');
+
     }
 }

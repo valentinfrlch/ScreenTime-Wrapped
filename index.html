@@ -27,21 +27,42 @@
     <!--add amp stories-->
     <amp-story title="Your Screen Time Wrapped">
         <amp-story-page id="page-1">
+            <amp-story-grid-layer template="fill">
+                <amp-img src="assets/story-background/1.jpg" height="100px" width="100px" layout="responsive"></amp-img>
+            </amp-story-grid-layer>
+
             <amp-story-grid-layer template="vertical">
-                <h1 id="totalHead"></h1>
-                <p id="totalText"></p>
+                <h1 animate-in="pulse" id="totalHead"></h1>
+                <p animate-in="pulse" id="totalText"></p>
+                <!--set background image-->
             </amp-story-grid-layer>
         </amp-story-page>
+
         <amp-story-page id="page-2">
+            <amp-story-grid-layer template="fill">
+                <amp-img src="assets/story-background/5.jpg" height="100px" width="100px" layout="responsive"></amp-img>
+            </amp-story-grid-layer>
             <amp-story-grid-layer template="vertical">
-                <h1 id="topHead"></h1>
-                <p id="topText"></p>
+                <h1 animate-in="pulse" id="topHead"></h1>
+                <p animate-in="pulse" id="topText" style="font-weight:bold"></p>
+                <p animate-in="pulse" id="topText2"></p>
             </amp-story-grid-layer>
         </amp-story-page>
-        <!-- Add more pages as needed -->
+
+        <amp-story-page id="page-3">
+            <amp-story-grid-layer template="fill" style="background-color: #17183B;">
+                <!--can we add custom html elements like the chart here?-->
+                <canvas id="totalTime-chart"></canvas>
+                <!--set background color-->
+                
+            </amp-story-grid-layer>
+            <amp-story-grid-layer template="vertical">
+                <h1 animate-in="fade-in" id="breakdownHead"></h1>
+                <p animate-in="fade-in" id="breakdownText" style="font-weight:bold"></p>
+            </amp-story-grid-layer>
+            <!-- Add more pages as needed -->
     </amp-story>
     <div id="drop_zone">Drop files here</div>
-    <canvas id="totalTime-chart"></canvas>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/0.4.0/js/sql.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="index.js"></script>

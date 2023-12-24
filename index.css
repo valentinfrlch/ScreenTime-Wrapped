@@ -21,6 +21,12 @@
      font-family: Poppins;
  }
 
+ canvas {
+    margin: 75% 0 0 0;
+    background-color: #17183B;
+    color: #fff;
+ }
+
  /* header style /*
  /* set logo and title side by side */
  .header {

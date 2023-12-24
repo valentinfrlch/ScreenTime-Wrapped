@@ -54,6 +54,27 @@ function transformData(rows) {
     return apps;
 }
 
+function loadSampleData() {
+    // load data from "assets/sampleData.db"
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'assets/sampleData.db', true);
+    xhr.responseType = 'arraybuffer';
+    xhr.onload = function (e) {
+        if (this.status == 200) {
+            // call runQuery with the response
+            runQuery(this.response).then(transformedData => {
+                createChart(transformedData);
+                // set .story div to display: block
+                loadStory(transformedData)
+            }).catch(error => {
+                console.error('An error occurred:', error);
+            });
+        }
+    }
+    xhr.send();
+}
+
+
 function runQuery(file) {
     return new Promise((resolve, reject) => {
         var reader = new FileReader();
@@ -213,7 +234,6 @@ window.onload = function () {
 
         var files = e.dataTransfer.files;
         for (var i = 0; i < files.length; i++) {
-            console.log(files[i].name);
             if (files[i].name === "knowledgeC.db") {
                 dropZone.remove(); // remove the drop zone
                 var transformed = runQuery(files[i]);
@@ -225,6 +245,9 @@ window.onload = function () {
                 }).catch(error => {
                     console.error('An error occurred:', error);
                 });
+            } else {
+                alert("Please select a file called \"knowledgeC.db\"")
+                return;
             }
         }
     }
@@ -272,7 +295,7 @@ window.onload = function () {
         var ampStoryElement = document.querySelector('amp-story');
         var storyContainer = document.getElementById('story-container');
         var parentElement = ampStoryElement.parentElement;
-        
+
         storyContainer.style.display = "block";
         parentElement.removeChild(ampStoryElement);
 

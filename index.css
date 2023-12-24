@@ -83,14 +83,14 @@
  }
 
  #story-container {
-    display:none;
-    /* make container cover whole page */
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 99%;
-    height: 99%;
+     display: none;
+     /* make container cover whole page */
+     position: fixed;
+     z-index: 1000;
+     left: 0;
+     top: 0;
+     width: 99%;
+     height: 99%;
  }
 
 
@@ -109,6 +109,22 @@
      justify-content: center;
      color: var(--color-secondary);
  }
+
+ #load-sample {
+     font-size: 0.7rem;
+     background-color: var(--color-secondary);
+     color: var(--color-primary);
+     border: none;
+     border-radius: 15px;
+     padding: 10px 20px;
+     cursor: pointer;
+     /* center button */
+     margin-top: 30px;
+    /* make button width 20% and center it */
+     width: 10%;
+     margin-left: 45%;
+ }
+
 
  canvas {
      margin: 75% 0 0 0;

@@ -82,6 +82,17 @@
      cursor: pointer;
  }
 
+ #story-container {
+    display:none;
+    /* make container cover whole page */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 99%;
+    height: 99%;
+ }
+
 
  #drop_zone {
      border: 2px dashed var(--color-secondary);

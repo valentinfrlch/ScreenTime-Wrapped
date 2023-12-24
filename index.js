@@ -270,7 +270,13 @@ window.onload = function () {
 
         // add "standalone" to amp-story element
         var ampStoryElement = document.querySelector('amp-story');
-        ampStoryElement.setAttribute('standalone', '');
+        var storyContainer = document.getElementById('story-container');
+        var parentElement = ampStoryElement.parentElement;
+        
+        storyContainer.style.display = "block";
+        parentElement.removeChild(ampStoryElement);
 
+        // Re-add the amp-story element to the DOM
+        parentElement.appendChild(ampStoryElement);
     }
 }

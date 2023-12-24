@@ -55,23 +55,20 @@ function transformData(rows) {
 }
 
 function loadSampleData() {
-    // load data from "assets/sampleData.db"
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'https://valentinfrlch.github.io/ScreenTime-Wrapped/assets/knowledgeC.db', true);
-    xhr.responseType = 'arraybuffer';
-    xhr.onload = function (e) {
-        if (this.status == 200) {
-            // call runQuery with the response
-            runQuery(this.response).then(transformedData => {
-                createChart(transformedData);
-                // set .story div to display: block
-                loadStory(transformedData)
-            }).catch(error => {
-                console.error('An error occurred:', error);
-            });
-        }
-    }
-    xhr.send();
+    // load data from "assets/knowledgeC.db". We don't need to run the query because the data is already in the correct format
+    path = "assets/knowledgeC.db";
+    // read this file so we can pass it to runQuery
+    fetch(path).then(function (response) {
+        return response.blob();
+    }).then(function (blob) {
+        runQuery(blob).then(transformedData => {
+            createChart(transformedData);
+            // set .story div to display: block
+            loadStory(transformedData)
+        }).catch(error => {
+            console.error('An error occurred:', error);
+        });
+    });
 }
 
 

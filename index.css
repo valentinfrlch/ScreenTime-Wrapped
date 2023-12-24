@@ -99,8 +99,8 @@
      -moz-border-radius: 15px;
      -webkit-border-radius: 15px;
      border-radius: 15px;
-     margin: 2vh 0 2vh 0;
-     height: 85vh;
+     margin: 2vh 20px 20px 20px;
+     height: 75vh;
      padding: 25px;
      text-align: center;
      /* alignt text center vertically */

@@ -8,6 +8,8 @@
     <meta name="description" content="Apple Screen Time Wrapped - See how you spent your time" />
     <!--add google fonts poppins-->
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link rel="stylesheet" href="index.css" />
     <script async src="https://cdn.ampproject.org/v0.js"></script>
     <script async custom-element="amp-story" src="https://cdn.ampproject.org/v0/amp-story-1.0.js"></script>
@@ -17,7 +19,9 @@
     <header>
         <div class="header">
             <div class="header-logo">
-                <img src="assets/logo.png" alt="Apple Logo" />
+                <span class="material-symbols-rounded">
+                    timelapse
+                </span>
                 <div class="header-title">
                     <h1>Screen Time Wrapped</h1>
                 </div>
@@ -54,7 +58,7 @@
                 <!--can we add custom html elements like the chart here?-->
                 <canvas id="totalTime-chart"></canvas>
                 <!--set background color-->
-                
+
             </amp-story-grid-layer>
             <amp-story-grid-layer template="vertical">
                 <h1 animate-in="fade-in" id="breakdownHead"></h1>

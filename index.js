@@ -145,7 +145,7 @@ function createChart(data) {
         // To lookup the apps name we use bundleIds.json
         // load bundleIds.json
         // load bundleIds.json
-        fetch('bundleIds.json')
+        fetch('assets/bundleIDs.json')
             .then(response => response.json())
             .then(bundleIds => {
                 var labels = Object.keys(data).map(function (bundleId) {
@@ -211,7 +211,7 @@ function loadStory(stats) {
     var totalText = "You used " + stats.length + " apps in total";
     var topHead = "Your most used app was...";
     // set topText
-    fetch('bundleIds.json')
+    fetch('assets/bundleIDs.json')
         .then(response => response.json())
         .then(bundleIds => {
             var labels = Object.keys(data).map(function (bundleId) {

@@ -209,6 +209,7 @@ function loadStory(stats) {
         .then(response => response.json())
         .then(bundleIds => {
             topText = bundleIds[stats[0][0]] || stats[0][0];
+            document.getElementById('topText').innerHTML = topText;
         })
         .catch(error => console.error('Error:', error));
 
@@ -221,7 +222,7 @@ function loadStory(stats) {
     document.getElementById('totalText').innerHTML = totalText;
 
     document.getElementById('topHead').innerHTML = topHead;
-    document.getElementById('topText').innerHTML = topText;
+    
     document.getElementById('topText2').innerHTML = topText2;
 
     document.getElementById('breakdownHead').innerHTML = breakdownHead;

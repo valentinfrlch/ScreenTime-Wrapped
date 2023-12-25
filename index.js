@@ -209,6 +209,7 @@ function loadStory(stats) {
         .then(response => response.json())
         .then(bundleIds => {
             topText = bundleIds[stats[0][0]] || stats[0][0];
+            console.log(topText);
             document.getElementById('topText').innerHTML = topText;
         })
         .catch(error => console.error('Error:', error));

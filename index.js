@@ -132,35 +132,6 @@ function getRandomColor() {
     return color;
 }
 
-var bundleIdToAppName = {
-    'com.apple.finder': 'Finder',
-    'com.google.Chrome': 'Google Chrome',
-    'com.apple.Safari': 'Safari',
-    'com.google.ios.youtube': 'YouTube',
-    'com.apple.mobilesafari': 'Safari',
-    'notion.id': 'Notion',
-    'com.apple.mail': 'Mail',
-    'com.apple.Terminal': 'Terminal',
-    'com.apple.iChat': 'Messages',
-    'com.apple.iCal': 'Calendar',
-    'com.apple.Music': 'Music',
-    'com.apple.Maps': 'Maps',
-    'com.apple.iBooks': 'Books',
-    'net.whatsapp.WhatsApp': 'WhatsApp',
-    'com.playstation.psremoteplay': 'PS Remote Play',
-    'com.spotify.client': 'Spotify',
-    'com.google.photos': 'Google Photos',
-    'company.thebrowser.Browser': 'Arc',
-    'com.burbn.instagram': 'Instagram',
-    'io.robbie.HomeAssistant': 'Home Assistant',
-    'com.plexapp.plex': 'Plex',
-    'com.apple.mobilenotes': 'Notes',
-    'com.apple.reminders': 'Reminders',
-    'com.apple.mobileslideshow': 'Photos',
-    'com.microsoft.VSCode': 'VS Code',
-    // Add more mappings here...
-};
-
 function createChart(data) {
     // Filter out apps with less than 1 hour of usage and sort by usage
     data = Object.entries(data)
@@ -170,8 +141,19 @@ function createChart(data) {
 
     var ctx = document.getElementById('totalTime-chart').getContext('2d');
     var labels = Object.keys(data).map(function (bundleId) {
-        // Use the app name if available, otherwise use the bundle identifier
-        return bundleIdToAppName[bundleId] || bundleId;
+        // Use the app name if available, otherwise use the bundle identifier.
+        // To lookup the apps name we use bundleIds.json
+        // load bundleIds.json
+        // load bundleIds.json
+        fetch('bundleIds.json')
+            .then(response => response.json())
+            .then(bundleIds => {
+                var labels = Object.keys(data).map(function (bundleId) {
+                    // Use the app name if available, otherwise use the bundle identifier.
+                    return bundleIds[bundleId] || bundleId;
+                });
+            })
+            .catch(error => console.error('Error:', error));
     });
     var datasets = labels.map(function (label, i) {
         return {
@@ -228,7 +210,19 @@ function loadStory(stats) {
     var totalHead = "Multitasking extraordinaire"
     var totalText = "You used " + stats.length + " apps in total";
     var topHead = "Your most used app was...";
-    var topText = bundleIdToAppName[stats[0][0]] || stats[0][0];
+    // set topText
+    fetch('bundleIds.json')
+        .then(response => response.json())
+        .then(bundleIds => {
+            var labels = Object.keys(data).map(function (bundleId) {
+                document.getElementById('topText').innerHTML = bundleIds[bundleId] || bundleId;
+            });
+        })
+        .catch(error => {
+            console.error('Error:', error)
+            document.getElementById('topText').innerHTML = bundleId;
+        });
+
     var topText2 = "And you clocked in an astounding " + secondsToHours(stats[0][1].usage) + " hours";
     var breakdownHead = "And here's a breakdown of your usage";
     var breakdownText = "A content connoisseur: You surely know your apps";
@@ -238,7 +232,6 @@ function loadStory(stats) {
     document.getElementById('totalText').innerHTML = totalText;
 
     document.getElementById('topHead').innerHTML = topHead;
-    document.getElementById('topText').innerHTML = topText;
     document.getElementById('topText2').innerHTML = topText2;
 
     document.getElementById('breakdownHead').innerHTML = breakdownHead;

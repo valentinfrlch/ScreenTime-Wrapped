@@ -141,16 +141,12 @@ function createChart(data) {
 
     var ctx = document.getElementById('totalTime-chart').getContext('2d');
     var labels = Object.keys(data).map(function (bundleId) {
-        // Use the app name if available, otherwise use the bundle identifier.
-        // To lookup the apps name we use bundleIds.json
-        // load bundleIds.json
-        // load bundleIds.json
         fetch('assets/bundleIDs.json')
             .then(response => response.json())
             .then(bundleIds => {
-                var labels = Object.keys(data).map(function (bundleId) {
+                var labels = Object.keys(data).map(function (bundleIds) {
                     // Use the app name if available, otherwise use the bundle identifier.
-                    return bundleIds[bundleId] || bundleId;
+                    return bundleIds[bundleIds] || bundleIds;
                 });
             })
             .catch(error => console.error('Error:', error));
@@ -214,13 +210,13 @@ function loadStory(stats) {
     fetch('assets/bundleIDs.json')
         .then(response => response.json())
         .then(bundleIds => {
-            var labels = Object.keys(data).map(function (bundleId) {
-                document.getElementById('topText').innerHTML = bundleIds[bundleId] || bundleId;
+            var labels = Object.keys(data).map(function (bundleIds) {
+                document.getElementById('topText').innerHTML = bundleIds[bundleIds] || bundleIds;
             });
         })
         .catch(error => {
             console.error('Error:', error)
-            document.getElementById('topText').innerHTML = bundleId;
+            document.getElementById('topText').innerHTML = bundleIds;
         });
 
     var topText2 = "And you clocked in an astounding " + secondsToHours(stats[0][1].usage) + " hours";

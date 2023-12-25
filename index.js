@@ -140,14 +140,11 @@ function createChart(data) {
         .reduce((obj, [k, v]) => Object.assign(obj, { [k]: v }), {});
 
     var ctx = document.getElementById('totalTime-chart').getContext('2d');
-    var labels = Object.keys(data).map(function (bundleId) {
+    var labels = Object.keys(data).map(function (data) {
         fetch('assets/bundleIDs.json')
             .then(response => response.json())
             .then(bundleIds => {
-                var labels = Object.keys(data).map(function (bundleIds) {
-                    // Use the app name if available, otherwise use the bundle identifier.
-                    return bundleIds[bundleIds] || bundleIds;
-                });
+                return bundleIds[data] || data;
             })
             .catch(error => console.error('Error:', error));
     });
@@ -206,18 +203,14 @@ function loadStory(stats) {
     var totalHead = "Multitasking extraordinaire"
     var totalText = "You used " + stats.length + " apps in total";
     var topHead = "Your most used app was...";
+    var topText = stats[0][0];
     // set topText
     fetch('assets/bundleIDs.json')
         .then(response => response.json())
         .then(bundleIds => {
-            var labels = Object.keys(data).map(function (bundleIds) {
-                document.getElementById('topText').innerHTML = bundleIds[bundleIds] || bundleIds;
-            });
+            topText = bundleIds[stats[0][0]] || stats[0][0];
         })
-        .catch(error => {
-            console.error('Error:', error)
-            document.getElementById('topText').innerHTML = bundleIds;
-        });
+        .catch(error => console.error('Error:', error));
 
     var topText2 = "And you clocked in an astounding " + secondsToHours(stats[0][1].usage) + " hours";
     var breakdownHead = "And here's a breakdown of your usage";
@@ -228,6 +221,7 @@ function loadStory(stats) {
     document.getElementById('totalText').innerHTML = totalText;
 
     document.getElementById('topHead').innerHTML = topHead;
+    document.getElementById('topText').innerHTML = topText;
     document.getElementById('topText2').innerHTML = topText2;
 
     document.getElementById('breakdownHead').innerHTML = breakdownHead;
